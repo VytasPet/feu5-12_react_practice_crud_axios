@@ -89,3 +89,8 @@ button {
   border: 1px solid #777;
   cursor: pointer;
 }
+
+.test {
+  justify-content: space-between;
+  align-items: center;
+}
