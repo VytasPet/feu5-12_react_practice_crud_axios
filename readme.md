@@ -9,3 +9,10 @@
 7. LoginForm turi email ir password.
 8. validuojam laukus ir valdo forma su Formik
 9. klaidos turi matytis po inputais ir ant inputu
+
+# Posts
+
+1. sukurti PostsPage.jsx
+2. Prideti Route ir i navigacija
+3. Komponente parsiusti posts is https://dummyjson.com/posts
+4. iskonsolinti parsiustus posts, neatvaizduoti jsx kol kas.
