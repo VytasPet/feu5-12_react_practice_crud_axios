@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import axios from 'axios';
+import { InputField } from '../ui/InputComps';
 
 const url = 'https://reqres.in/api/login';
 
@@ -50,17 +51,18 @@ function LoginForm() {
     <>
       {beError && <ErrorMsg>{beError}</ErrorMsg>}
       <form onSubmit={formik.handleSubmit}>
-        <input
+        <InputField
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           type="text"
-          placeholder="Email"
+          label="Email"
           name="email"
+          error={formik.touched.email && formik.errors.email}
         />
-        {formik.touched.email && formik.errors.email && (
+        {/* {formik.touched.email && formik.errors.email && (
           <ErrorMsg>{formik.errors.email}</ErrorMsg>
-        )}
+        )} */}
 
         <input
           value={formik.values.password}
