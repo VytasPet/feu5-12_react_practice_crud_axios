@@ -2,6 +2,11 @@ import React from 'react';
 import { SubmitButton } from '../ui/Button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import styled from 'styled-components';
+
+const ErrorMsg = styled.p`
+  color: tomato;
+`;
 
 function LoginForm() {
   const formik = useFormik({
@@ -24,17 +29,26 @@ function LoginForm() {
         <input
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           type="text"
           placeholder="Email"
           name="email"
         />
+        {formik.touched.email && formik.errors.email && (
+          <ErrorMsg>{formik.errors.email}</ErrorMsg>
+        )}
+
         <input
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           type="password"
           placeholder="Password"
           name="password"
         />
+        {formik.touched.password && formik.errors.password && (
+          <ErrorMsg>{formik.errors.password}</ErrorMsg>
+        )}
         <SubmitButton>Login</SubmitButton>
       </form>
       <div>
