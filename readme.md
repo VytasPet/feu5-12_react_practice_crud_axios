@@ -14,5 +14,31 @@
 
 1. sukurti PostsPage.jsx
 2. Prideti Route ir i navigacija
-3. Komponente parsiusti posts is https://dummyjson.com/posts
-4. iskonsolinti parsiustus posts, neatvaizduoti jsx kol kas.
+3. Komponente parsiusti posts is http://localhost:5000/posts
+4. iskonsolinti parsiustus posts.
+5. sugeneruoti postu korteles is gautu duomenu
+
+## NewPost forma
+
+1. Sukurti forma kuri tures siuot inputus:
+   - title
+   - body
+   - author
+   - tags
+   - date
+2. validuoti visus laukus
+3. forma pateikiant sugeneruoti objekta kaip pateikta zemiau
+
+```json
+{
+  "title": "James",
+  "body": "This is a test post.",
+  "author": "John Doe",
+  "tags": ["test", "example"],
+  "date": "2022-04-03"
+}
+```
+
+4. siunciam i http://localhost:5000/posts su Post metodu
+
+## localus back endas
