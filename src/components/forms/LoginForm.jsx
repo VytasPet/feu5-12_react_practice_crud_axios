@@ -1,6 +1,7 @@
 import React from 'react';
 import { SubmitButton } from '../ui/Button.styled';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 function LoginForm() {
   const formik = useFormik({
@@ -8,10 +9,15 @@ function LoginForm() {
       email: '',
       password: '',
     },
+    validationSchema: Yup.object({
+      email: Yup.string().email().required(),
+      password: Yup.string().min(4).trim().required(),
+    }),
     onSubmit: (values) => {
       console.log('form values ===', values);
     },
   });
+  console.log('formik.errors ===', formik.errors);
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
