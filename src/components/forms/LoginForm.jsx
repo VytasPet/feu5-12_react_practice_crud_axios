@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitButton } from '../ui/Button.styled';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
+import axios from 'axios';
+
+const url = 'https://reqres.in/api/login';
 
 const ErrorMsg = styled.p`
   color: tomato;
 `;
 
 function LoginForm() {
+  const [beError, setBeError] = useState('');
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -20,11 +25,30 @@ function LoginForm() {
     }),
     onSubmit: (values) => {
       console.log('form values ===', values);
+      // clear errors
+      setBeError('');
+      // siusti prisijungimui
+      sendLoginData(values);
     },
   });
-  console.log('formik.errors ===', formik.errors);
+  // console.log('formik.errors ===', formik.errors);
+
+  function sendLoginData(loginObj) {
+    axios
+      .post(url, loginObj)
+      .then((resp) => {
+        console.log('resp ===', resp);
+      })
+      .catch((err) => {
+        console.warn('sendLoginData error', err);
+        console.log('err.response.data.error ===', err.response.data.error);
+        setBeError(err.response.data.error);
+      });
+  }
+
   return (
     <>
+      {beError && <ErrorMsg>{beError}</ErrorMsg>}
       <form onSubmit={formik.handleSubmit}>
         <input
           value={formik.values.email}
