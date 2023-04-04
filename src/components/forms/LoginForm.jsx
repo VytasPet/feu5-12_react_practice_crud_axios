@@ -39,6 +39,7 @@ function LoginForm() {
       .post(url, loginObj)
       .then((resp) => {
         console.log('resp ===', resp);
+        // irasom i contexta email, token
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);
