@@ -23,9 +23,8 @@ export const LargeButton = styled(Button)`
 
 export const SubmitButton = styled(Button).attrs((props) => ({
   type: 'submit',
-  className: 'blue',
 }))`
-  border-radius: 30px;
+  border-radius: 20px;
 `;
 
 export default Button;
