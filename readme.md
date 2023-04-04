@@ -42,3 +42,5 @@
 4. siunciam i http://localhost:5000/posts su Post metodu
 
 ## localus back endas
+
+- https://github.com/MariusCodeAcademy/blog_api_crud_be_json_server

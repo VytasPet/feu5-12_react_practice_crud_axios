@@ -34,8 +34,8 @@ const Flex = styled.div`
 
 const navData = [
   { id: 1, to: '/', title: 'Home' },
-  { id: 4, to: '/contacts', title: 'Contacts' },
-  // { id: 2, to: '/login', title: 'Login' },
+  { id: 2, to: '/contacts', title: 'Contacts' },
+  { id: 3, to: '/posts', title: 'Posts' },
 ];
 
 function Header() {
