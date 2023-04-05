@@ -12,6 +12,11 @@ const ErrorMsg = styled.p`
   color: tomato;
 `;
 
+const inputsData = [
+  { id: 1, type: 'text', label: 'Email', name: 'email' },
+  { id: 2, type: 'password', label: 'Password', name: 'password' },
+];
+
 function LoginForm() {
   const [beError, setBeError] = useState('');
 
@@ -52,30 +57,30 @@ function LoginForm() {
     <>
       {beError && <ErrorMsg>{beError}</ErrorMsg>}
       <form onSubmit={formik.handleSubmit}>
-        <InputField
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          type="text"
-          label="Email"
-          name="email"
-          error={formik.touched.email && formik.errors.email}
-        />
-        {/* {formik.touched.email && formik.errors.email && (
-          <ErrorMsg>{formik.errors.email}</ErrorMsg>
-        )} */}
+        {inputsData.map((iObj) => (
+          <InputField
+            key={iObj.id}
+            value={formik.values[iObj.name]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            type={iObj.type}
+            label={iObj.label}
+            name={iObj.name}
+            error={formik.touched[iObj.name] && formik.errors[iObj.name]}
+          />
+        ))}
 
-        <input
+        {/* <InputField
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           type="password"
           placeholder="Password"
+          label="Password"
           name="password"
-        />
-        {formik.touched.password && formik.errors.password && (
-          <ErrorMsg>{formik.errors.password}</ErrorMsg>
-        )}
+          error={formik.touched.password && formik.errors.password}
+        /> */}
+
         <SubmitButton>Login</SubmitButton>
       </form>
       <div>

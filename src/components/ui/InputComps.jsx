@@ -44,7 +44,7 @@ const Label = styled.label`
 export const InputField = ({ label, error, ...rest }) => (
   <InputWrapper>
     <Label>{label}</Label>
-    <Input error={error} {...rest} />
+    <Input error={error} placeholder={label} {...rest} />
     {error && <Error>{error}</Error>}
   </InputWrapper>
 );
