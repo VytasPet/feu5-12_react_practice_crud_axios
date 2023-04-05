@@ -7,6 +7,7 @@ import ContactPage from './pages/ConactPage';
 import Header from './components/layout/Header';
 import PostsPage from './pages/PostsPage';
 import NewPostPage from './pages/NewPostPage';
+import SinglePostPage from './pages/SinglePostPage';
 
 function App() {
   // App.jsx prideti dinamini route SinglePostPage
@@ -18,6 +19,7 @@ function App() {
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/contact'} element={<ContactPage />} />
         <Route path={'/posts/'} element={<PostsPage />} />
+        <Route path={'/posts/:postId'} element={<SinglePostPage />} />
         <Route path={'/posts/new'} element={<NewPostPage />} />
       </Routes>
     </div>

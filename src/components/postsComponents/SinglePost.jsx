@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 function SinglePost({ post, full = false }) {
   return (
-    <Card key={post.id}>
+    <Card>
       <Title>{post.title}</Title>
       <Body>{post.body.slice(0, 70)}...</Body>
       <Footer>
@@ -16,7 +16,7 @@ function SinglePost({ post, full = false }) {
       </Footer>
       <Control>
         <Button>Delete</Button>
-        <Link to={'/posts/1'}>Read more...</Link>
+        <Link to={`/posts/${post.id}`}>Read more...</Link>
       </Control>
     </Card>
   );

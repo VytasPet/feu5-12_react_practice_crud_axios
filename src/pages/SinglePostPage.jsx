@@ -1,8 +1,11 @@
 import React from 'react';
 import Container from '../components/ui/Container';
+import { useParams } from 'react-router';
 
 function SinglePostPage() {
-  // /posts/:postId
+  // /posts/:postId - :postId yra url parametras
+  const { postId } = useParams();
+  console.log('postId ===', postId);
   // pasiimti id is postId
   // parsisiusti post is backen pagal id
   // atvaizduoti singlePost
