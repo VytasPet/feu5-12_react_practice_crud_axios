@@ -6,9 +6,12 @@ import { useEffect, useState } from 'react';
 // butinai turi prasideti zodeliu 'use'
 function useGetData(url) {
   const [data, setData] = useState({});
+  const [error, setError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // const url = `http://localhost:5000/posts/${postId}`;
+    setIsLoading(true);
     axios
       .get(url)
       .then((resp) => {
@@ -17,10 +20,14 @@ function useGetData(url) {
       })
       .catch((err) => {
         console.warn('err ===', err);
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  return { data, setData };
+  return [data, setData, error, isLoading];
 }
 
 export default useGetData;

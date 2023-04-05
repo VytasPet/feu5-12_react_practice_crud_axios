@@ -10,15 +10,20 @@ function SinglePostPage() {
   const { postId } = useParams();
   console.log('postId ===', postId);
 
-  const hookRez = useGetData(`http://localhost:5000/posts/${postId}`);
-  console.log('hookRez ===', hookRez);
-
-  const currentPost = hookRez.data;
+  const [currentPost, setPost, postErr, isLoading] = useGetData(
+    `http://localhost:5000/posts/${postId}`,
+  );
 
   return (
     <Container>
-      <Title>{currentPost.title}</Title>
-      <SinglePost post={currentPost} full />
+      {postErr && <h2>I vyko klaida</h2>}
+      {isLoading && <h2>Loading...</h2>}
+      {!isLoading && !postErr && (
+        <>
+          <Title>{currentPost.title}</Title>
+          <SinglePost post={currentPost} full />
+        </>
+      )}
     </Container>
   );
 }
