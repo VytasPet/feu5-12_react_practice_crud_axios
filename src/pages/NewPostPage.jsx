@@ -7,7 +7,7 @@ const inputsData = [
   { id: 2, type: 'texarea', label: 'Body', name: 'body' },
   { id: 3, type: 'text', label: 'Author', name: 'author' },
   { id: 4, type: 'text', label: 'Tags', name: 'tags' },
-  { id: 5, type: 'text', label: 'Date', name: 'date' },
+  { id: 5, type: 'date', label: 'Date', name: 'date' },
 ];
 
 function NewPostPage() {
