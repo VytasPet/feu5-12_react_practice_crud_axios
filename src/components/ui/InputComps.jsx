@@ -18,6 +18,7 @@ const TextArea = styled.textarea`
   border: 1px solid ${(props) => (props.error ? 'red' : '#ccc')};
   border-radius: 4px;
   outline: none;
+  min-height: 6em;
 
   &:focus {
     box-shadow: 0 0 5px ${(props) => (props.error ? 'red' : '#333')};
@@ -41,18 +42,20 @@ const Label = styled.label`
   margin-bottom: 4px;
 `;
 
-export const InputField = ({ label, error, ...rest }) => (
-  <InputWrapper>
-    <Label>{label}</Label>
-    <Input error={error} placeholder={label} {...rest} />
-    {error && <Error>{error}</Error>}
-  </InputWrapper>
-);
+export const InputField = ({ label, error, type, ...rest }) => {
+  //
 
-export const TextAreaField = ({ label, error, ...rest }) => (
-  <InputWrapper>
-    <Label>{label}</Label>
-    <TextArea error={error} {...rest} />
-    {error && <Error>{error}</Error>}
-  </InputWrapper>
-);
+  const isTextArea = type === 'texarea' ? true : false;
+  return (
+    <InputWrapper>
+      <Label>{label}</Label>
+      {isTextArea ? (
+        <TextArea error={error} placeholder={label} {...rest} />
+      ) : (
+        <Input error={error} placeholder={label} type={type} {...rest} />
+      )}
+
+      {error && <Error>{error}</Error>}
+    </InputWrapper>
+  );
+};
