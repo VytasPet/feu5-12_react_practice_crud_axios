@@ -21,6 +21,7 @@ function NewPostPage() {
   const navigate = useNavigate();
   // prideti newPostError state
   const [newPostError, setNewPostError] = useState({});
+  const [formSentSuccess, setFormSentSuccess] = useState(false);
   const formik = useFormik({
     initialValues: {
       title: '80 days around world',
@@ -52,7 +53,10 @@ function NewPostPage() {
       .then((resp) => {
         console.log('pavyko resp ===', resp);
         // naviguoti i posts page
-        navigate('/posts');
+        setFormSentSuccess(true);
+        setTimeout(() => {
+          navigate('/posts');
+        }, 3000);
       })
       .catch((err) => {
         console.warn('NEpavyko err ===', err);
@@ -68,6 +72,7 @@ function NewPostPage() {
     <Container>
       <h1>NewPostPage</h1>
       <p>Welcome to NewPostPage</p>
+      <Feedback show={formSentSuccess}>Post created</Feedback>
       <Feedback show={toShowErrror} type={'error'}>
         Tinklo klaida, bandykite veliau
       </Feedback>

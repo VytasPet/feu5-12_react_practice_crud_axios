@@ -1,24 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Button from '../ui/Button.styled';
+import { Link } from 'react-router-dom';
 
-function SinglePost({ post }) {
+function SinglePost({ post, full = false }) {
   return (
     <Card key={post.id}>
       <Title>{post.title}</Title>
-      <Body>{post.body}</Body>
+      <Body>{post.body.slice(0, 70)}...</Body>
       <Footer>
         <Author>{post.author}</Author>
         <Tags>{post.tags.join(', ')}</Tags>
         <Date>{post.date}</Date>
       </Footer>
+      <Control>
+        <Button>Delete</Button>
+        <Link to={'/posts/1'}>Read more...</Link>
+      </Control>
     </Card>
   );
 }
 
 SinglePost.propTypes = {
   post: PropTypes.object,
+  full: PropTypes.bool,
 };
+
+const Control = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
 
 const Card = styled.div`
   border: 1px solid #e2e8f0;

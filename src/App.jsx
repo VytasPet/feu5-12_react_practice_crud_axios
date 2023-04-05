@@ -9,6 +9,7 @@ import PostsPage from './pages/PostsPage';
 import NewPostPage from './pages/NewPostPage';
 
 function App() {
+  // App.jsx prideti dinamini route SinglePostPage
   return (
     <div className="">
       <Header />
@@ -16,7 +17,7 @@ function App() {
         <Route path={'/'} element={<HomePage />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/contact'} element={<ContactPage />} />
-        <Route path={'/posts'} element={<PostsPage />} />
+        <Route path={'/posts/'} element={<PostsPage />} />
         <Route path={'/posts/new'} element={<NewPostPage />} />
       </Routes>
     </div>
