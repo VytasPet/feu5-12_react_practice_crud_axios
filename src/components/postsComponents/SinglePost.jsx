@@ -7,16 +7,17 @@ import { Link } from 'react-router-dom';
 function SinglePost({ post, full = false }) {
   return (
     <Card>
-      <Title>{post.title}</Title>
-      <Body>{post.body.slice(0, 70)}...</Body>
+      {!full && <Title>{post.title}</Title>}
+      <Body>{full ? post.body : post.body?.slice(0, 70)}</Body>
       <Footer>
         <Author>{post.author}</Author>
-        <Tags>{post.tags.join(', ')}</Tags>
+        <Tags>{post.tags?.join(', ')}</Tags>
         <Date>{post.date}</Date>
       </Footer>
       <Control>
         <Button>Delete</Button>
-        <Link to={`/posts/${post.id}`}>Read more...</Link>
+        {full && <Link to={`/posts`}>Go back</Link>}
+        {!full && <Link to={`/posts/${post.id}`}>Read more...</Link>}
       </Control>
     </Card>
   );
