@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
@@ -39,6 +39,8 @@ const navData = [
   { id: 4, to: '/posts/new', title: 'Add post' },
 ];
 
+const isLoggedIn = false;
+
 function Header() {
   return (
     <StyledHeader>
@@ -52,6 +54,7 @@ function Header() {
         </Nav>
         <Nav>
           <SiteLink to={'/login'}>Login</SiteLink>
+          <Link to={'/'}>Loguot</Link>
         </Nav>
       </Flex>
     </StyledHeader>

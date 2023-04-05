@@ -17,3 +17,4 @@
 4. paduodam authCtx objekta kuriame yra visos 3 punkto reikmes
 5. main.jsx apjuosiam App su AuthProvider
 6. LoginForm mes panaudojam useContext hook kada gauti login funkcija ir ja ivygdyti, paduodant email ir token reikmes
+7. isvesti is state token reikmes kintamaji isLoggedIn kuri turetu buti boolean tipo
