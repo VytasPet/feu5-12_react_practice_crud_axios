@@ -1,32 +1,20 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Container from '../components/ui/Container';
 import { useParams } from 'react-router';
-import { useState } from 'react';
-import axios from 'axios';
 import SinglePost from '../components/postsComponents/SinglePost';
 import styled from 'styled-components';
+import useGetData from '../hooks/useGetData';
 
 function SinglePostPage() {
-  const [currentPost, setCurrentPost] = useState({});
-
-  useEffect(() => {
-    const url = `http://localhost:5000/posts/${postId}`;
-    axios
-      .get(url)
-      .then((resp) => {
-        console.log('resp.data ===', resp.data);
-        setCurrentPost(resp.data);
-      })
-      .catch((err) => {
-        console.warn('err ===', err);
-      });
-  }, []);
   // /posts/:postId - :postId yra url parametras
   const { postId } = useParams();
   console.log('postId ===', postId);
 
-  // parsisiusti post is backen pagal id
-  // atvaizduoti singlePost
+  const hookRez = useGetData(`http://localhost:5000/posts/${postId}`);
+  console.log('hookRez ===', hookRez);
+
+  const currentPost = hookRez.data;
+
   return (
     <Container>
       <Title>{currentPost.title}</Title>
