@@ -6,6 +6,8 @@ import { SubmitButton } from '../components/ui/Button.styled';
 import * as Yup from 'yup';
 import axios from 'axios';
 import Feedback from '../components/ui/Feedback';
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
 
 const inputsData = [
   { id: 1, type: 'text', label: 'Title', name: 'title' },
@@ -16,14 +18,15 @@ const inputsData = [
 ];
 
 function NewPostPage() {
+  const navigate = useNavigate();
   // prideti newPostError state
-
+  const [newPostError, setNewPostError] = useState({});
   const formik = useFormik({
     initialValues: {
-      title: '',
-      body: '',
-      author: '',
-      tags: '',
+      title: '80 days around world',
+      body: 'about 80 days around world',
+      author: 'James band',
+      tags: 'travel, books',
       date: '',
     },
     validationSchema: Yup.object({
@@ -35,31 +38,38 @@ function NewPostPage() {
     }),
     onSubmit(values) {
       console.log('submiting...', values);
-      sendDataToBe(values);
+      const valuesWithTagArr = { ...values };
+      valuesWithTagArr.tags = valuesWithTagArr.tags.split(',');
+      sendDataToBe(valuesWithTagArr);
     },
   });
 
   function sendDataToBe(dataToSend) {
+    // clear errors
+    setNewPostError({});
     axios
       .post('http://localhost:5000/posts', dataToSend)
       .then((resp) => {
         console.log('pavyko resp ===', resp);
+        // naviguoti i posts page
+        navigate('/posts');
       })
       .catch((err) => {
         console.warn('NEpavyko err ===', err);
         // set new newPostError to err
+        setNewPostError(err);
       });
   }
 
-  // const toShowErrror = ar newPostError code yra ERR_NETWORK
+  const toShowErrror = newPostError.code === 'ERR_NETWORK';
 
   // console.log('formik.errors ===', formik.errors);
   return (
     <Container>
       <h1>NewPostPage</h1>
       <p>Welcome to NewPostPage</p>
-      <Feedback show={true} type={'error'}>
-        Testing feedback
+      <Feedback show={toShowErrror} type={'error'}>
+        Tinklo klaida, bandykite veliau
       </Feedback>
       <form onSubmit={formik.handleSubmit}>
         {inputsData.map((iObj) => (
