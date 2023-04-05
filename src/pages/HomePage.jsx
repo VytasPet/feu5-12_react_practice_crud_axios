@@ -1,11 +1,12 @@
 import React from 'react';
+import Container from '../components/ui/Container';
 
 function HomePage() {
   return (
-    <div>
+    <Container>
       <h1>HomePage</h1>
       <p>Welcome to HomePage</p>
-    </div>
+    </Container>
   );
 }
 

@@ -36,6 +36,7 @@ const navData = [
   { id: 1, to: '/', title: 'Home' },
   { id: 2, to: '/contacts', title: 'Contacts' },
   { id: 3, to: '/posts', title: 'Posts' },
+  { id: 4, to: '/posts/new', title: 'Add post' },
 ];
 
 function Header() {

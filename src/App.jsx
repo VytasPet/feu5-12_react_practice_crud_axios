@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import ContactPage from './pages/ConactPage';
 import Header from './components/layout/Header';
 import PostsPage from './pages/PostsPage';
+import NewPostPage from './pages/NewPostPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path={'/login'} element={<LoginPage />} />
         <Route path={'/contact'} element={<ContactPage />} />
         <Route path={'/posts'} element={<PostsPage />} />
+        <Route path={'/posts/new'} element={<NewPostPage />} />
       </Routes>
     </div>
   );
