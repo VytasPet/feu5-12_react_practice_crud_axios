@@ -1,6 +1,10 @@
 import React from 'react';
 import Container from '../components/ui/Container';
 import { InputField } from '../components/ui/InputComps';
+import { useFormik } from 'formik';
+import { SubmitButton } from '../components/ui/Button.styled';
+import * as Yup from 'yup';
+import axios from 'axios';
 
 const inputsData = [
   { id: 1, type: 'text', label: 'Title', name: 'title' },
@@ -12,19 +16,57 @@ const inputsData = [
 
 function NewPostPage() {
   // useFormik to controll the form
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      body: '',
+      author: '',
+      tags: '',
+      date: '',
+    },
+    validationSchema: Yup.object({
+      title: Yup.string().min(3).required(),
+      body: Yup.string().min(10).required(),
+      author: Yup.string().min(3).required(),
+      tags: Yup.string().min(3).required(),
+      date: Yup.date().required(),
+    }),
+    onSubmit(values) {
+      console.log('submiting...', values);
+      sendDataToBe(values);
+    },
+  });
+
+  function sendDataToBe(dataToSend) {
+    axios
+      .post('http://localhost:5000/posts', dataToSend)
+      .then((resp) => {
+        console.log('pavyko resp ===', resp);
+      })
+      .catch((err) => {
+        console.warn('NEpavyko err ===', err);
+      });
+  }
+
+  // console.log('formik.errors ===', formik.errors);
   return (
     <Container>
       <h1>NewPostPage</h1>
       <p>Welcome to NewPostPage</p>
-      <form>
+      <form onSubmit={formik.handleSubmit}>
         {inputsData.map((iObj) => (
           <InputField
             key={iObj.id}
             type={iObj.type}
             label={iObj.label}
             name={iObj.name}
+            value={formik.values[iObj.name]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched[iObj.name] && formik.errors[iObj.name]}
           />
         ))}
+        <SubmitButton>Create</SubmitButton>
       </form>
     </Container>
   );
