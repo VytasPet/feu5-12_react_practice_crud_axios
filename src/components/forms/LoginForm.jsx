@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import styled from 'styled-components';
 import axios from 'axios';
 import { InputField } from '../ui/InputComps';
+import { useAuthContext } from '../../store/AuthProvider';
 
 const url = 'https://reqres.in/api/login';
 
@@ -18,6 +19,8 @@ const inputsData = [
 ];
 
 function LoginForm() {
+  const authCtx = useAuthContext();
+
   const [beError, setBeError] = useState('');
 
   const formik = useFormik({
@@ -44,6 +47,10 @@ function LoginForm() {
       .post(url, loginObj)
       .then((resp) => {
         console.log('resp ===', resp);
+        const token = resp.data.token;
+        const email = loginObj.email;
+        authCtx.login(token, email);
+
         // irasom i contexta email, token
       })
       .catch((err) => {
