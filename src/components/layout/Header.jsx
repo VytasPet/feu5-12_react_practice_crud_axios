@@ -1,6 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAuthContext } from '../../store/AuthProvider';
+import Button from '../ui/Button.styled';
 
 const StyledHeader = styled.header`
   background-color: #333;
@@ -56,7 +57,11 @@ function Header() {
         </Nav>
         <Nav>
           {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
-          {ctx.isLoggedIn && <Link to={'/'}>Loguot</Link>}
+          {ctx.isLoggedIn && (
+            <Link to={'/'}>
+              <Button>Loguot</Button>
+            </Link>
+          )}
         </Nav>
       </Flex>
     </StyledHeader>

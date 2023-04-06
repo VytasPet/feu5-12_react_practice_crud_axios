@@ -20,6 +20,11 @@ function AuthProvider({ children }) {
     setEmail(userEmail);
   }
 
+  // sukurti funkcija logout
+  // nustato token ir email i ''
+  // perduodam logout i authCtx
+  // panaudojam logout Hederyje paspaudus logout mygtuka
+
   const authCtx = {
     token,
     email,
