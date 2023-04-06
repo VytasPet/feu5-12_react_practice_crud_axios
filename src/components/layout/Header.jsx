@@ -59,7 +59,7 @@ function Header() {
           {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
           {ctx.isLoggedIn && (
             <Link to={'/'}>
-              <Button>Loguot</Button>
+              <Button onClick={ctx.logout}>Loguot</Button>
             </Link>
           )}
         </Nav>

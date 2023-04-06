@@ -19,9 +19,12 @@ function AuthProvider({ children }) {
     setToken(userToken);
     setEmail(userEmail);
   }
-
-  // sukurti funkcija logout
-  // nustato token ir email i ''
+  function logout() {
+    // sukurti funkcija logout
+    // nustato token ir email i ''
+    setToken('');
+    setEmail('');
+  }
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka
 
@@ -29,6 +32,7 @@ function AuthProvider({ children }) {
     token,
     email,
     login,
+    logout,
     isLoggedIn,
   };
   return (
