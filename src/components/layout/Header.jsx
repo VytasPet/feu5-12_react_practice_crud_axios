@@ -37,8 +37,8 @@ const Flex = styled.div`
 const navData = [
   { id: 1, to: '/', title: 'Home' },
   { id: 2, to: '/contacts', title: 'Contacts' },
-  { id: 3, to: '/posts', title: 'Posts' },
-  { id: 4, to: '/posts/new', title: 'Add post' },
+  // { id: 3, to: '/posts', title: 'Posts' },
+  // { id: 4, to: '/posts/new', title: 'Add post' },
 ];
 
 function Header() {
@@ -54,6 +54,12 @@ function Header() {
               {title}
             </SiteLink>
           ))}
+          {ctx.isLoggedIn && (
+            <>
+              <SiteLink to={'/posts'}>Posts</SiteLink>
+              <SiteLink to={'/posts/new'}>Add post</SiteLink>
+            </>
+          )}
         </Nav>
         <Nav>
           {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
