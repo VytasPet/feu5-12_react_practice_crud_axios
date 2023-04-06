@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import styled from 'styled-components';
 import axios from 'axios';
 import { InputField } from '../ui/InputComps';
+import { useAuthContext } from '../../store/AuthProvider';
 
 const url = 'https://reqres.in/api/login';
 
@@ -18,11 +19,13 @@ const inputsData = [
 ];
 
 function LoginForm() {
+  const authCtx = useAuthContext();
+  console.log('authCtx ===', authCtx);
   const [beError, setBeError] = useState('');
 
   const formik = useFormik({
     initialValues: {
-      email: '',
+      email: 'emma.wong@reqres.in',
       password: '',
     },
     validationSchema: Yup.object({
@@ -45,6 +48,9 @@ function LoginForm() {
       .then((resp) => {
         console.log('resp ===', resp);
         // irasom i contexta email, token
+        const token = resp.data.token;
+        const email = loginObj.email;
+        authCtx.login(token, email);
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);
