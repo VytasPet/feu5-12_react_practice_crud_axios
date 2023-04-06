@@ -38,6 +38,13 @@ const Wrap = styled.div`
       border-color: tomato;
       color: tomato;
     `}
+  ${(props) =>
+    props.feedbackType === 'success' &&
+    css`
+      background-color: #e6ffe6; /* Light Green */
+      border-color: #006600; /* Dark Green */
+      color: #006600; /* Dark Green */
+    `}
 `;
 
 const Value = styled.h3`
