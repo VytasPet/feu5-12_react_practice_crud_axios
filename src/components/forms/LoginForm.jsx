@@ -46,7 +46,7 @@ function LoginForm() {
     axios
       .post(url, loginObj)
       .then((resp) => {
-        console.log('resp ===', resp);
+        console.log('resp ===', resp.data);
         // irasom i contexta email, token
         const token = resp.data.token;
         const email = loginObj.email;

@@ -11,6 +11,10 @@ function AuthProvider({ children }) {
   const [token, setToken] = useState('');
   const [email, setEmail] = useState('');
 
+  // const isLoggedIn = token === '' ? false : true;
+  // const isLoggedIn = token ? true : false;
+  const isLoggedIn = !!token;
+
   function login(userToken, userEmail) {
     setToken(userToken);
     setEmail(userEmail);
@@ -20,6 +24,7 @@ function AuthProvider({ children }) {
     token,
     email,
     login,
+    isLoggedIn,
   };
   return (
     <AuthContext.Provider value={authCtx}>{children}</AuthContext.Provider>

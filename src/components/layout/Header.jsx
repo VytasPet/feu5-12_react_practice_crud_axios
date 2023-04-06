@@ -40,11 +40,10 @@ const navData = [
   { id: 4, to: '/posts/new', title: 'Add post' },
 ];
 
-const isLoggedIn = false;
-
 function Header() {
   const ctx = useAuthContext();
-  console.log('ctx ===', ctx);
+  // console.log('ctx ===', ctx);
+  // console.log('isLoggedIn ===', isLoggedIn);
   return (
     <StyledHeader>
       <Flex className="container">
@@ -56,8 +55,8 @@ function Header() {
           ))}
         </Nav>
         <Nav>
-          <SiteLink to={'/login'}>Login</SiteLink>
-          <Link to={'/'}>Loguot</Link>
+          {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
+          {ctx.isLoggedIn && <Link to={'/'}>Loguot</Link>}
         </Nav>
       </Flex>
     </StyledHeader>
