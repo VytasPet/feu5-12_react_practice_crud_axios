@@ -1,5 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuthContext } from '../../store/AuthProvider';
 
 const StyledHeader = styled.header`
   background-color: #333;
@@ -42,6 +43,8 @@ const navData = [
 const isLoggedIn = false;
 
 function Header() {
+  const ctx = useAuthContext();
+  console.log('ctx ===', ctx);
   return (
     <StyledHeader>
       <Flex className="container">
