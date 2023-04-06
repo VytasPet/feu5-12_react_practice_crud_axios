@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 
 function Feedback({ children, type, show }) {
@@ -26,15 +26,18 @@ const Wrap = styled.div`
   margin-top: 3rem;
   margin-bottom: 3rem;
   text-align: center;
-  background-color: ${(props) => {
-    return props.feedbackType === 'error' ? '#fce2de' : '#f5f5f5';
-  }};
-  border-color: ${(props) => {
-    return props.feedbackType === 'error' ? 'tomato' : '#000';
-  }};
-  color: ${(props) => {
-    return props.feedbackType === 'error' ? 'tomato' : '#000';
-  }};
+
+  background-color: #f5f5f5;
+  border-color: #000;
+  color: #000;
+
+  ${(props) =>
+    props.feedbackType === 'error' &&
+    css`
+      background-color: #fce2de;
+      border-color: tomato;
+      color: tomato;
+    `}
 `;
 
 const Value = styled.h3`
