@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const StyledForm = styled.form`
   display: flex;
@@ -59,11 +60,13 @@ function ContactForm() {
       message: '',
     },
     onSubmit: (values, { resetForm, setSubmitting }) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resetForm();
-        setSubmitting(false);
-      }, 1000);
+      sendEmail(values, setSubmitting);
+
+      // setTimeout(() => {
+      //   alert(JSON.stringify(values, null, 2));
+      //   resetForm();
+      //   setSubmitting(false);
+      // }, 1000);
     },
     validate: (values) => {
       const errors = {};
@@ -85,6 +88,22 @@ function ContactForm() {
       return errors;
     },
   });
+
+  function sendEmail(emailValuesObj, setSubmitting) {
+    const emaiTo = '9766bbb2659fd75614fbdd63f252d9f0';
+    // https://github.com/axios/axios
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios
+      .post(`https://formsubmit.co/ajax/${emaiTo}`, {
+        formTitle: 'FormSubmit form my form',
+        ...emailValuesObj,
+      })
+      .then((response) => {
+        console.log('response.data ===', response.data);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => setSubmitting(false));
+  }
 
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
