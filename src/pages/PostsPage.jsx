@@ -28,14 +28,20 @@ function PostsPage() {
   const networkError = error.code === 'ERR_NETWORK';
 
   function handleTagFilterChange(e) {
-    console.log('handleTagFilterChange e.target.value ===', e.target.value);
+    // console.log('handleTagFilterChange e.target.value ===', e.target.value);
+    setActiveFilterVal(e.target.value);
   }
 
-  // const filteredPosts = allPosts.filter();
   // atrinkimo salyga?
   // kai kas su taps su kuo atrinksim elementa?
   // activeFilterVal => CSS
   // kai viename is all posts tagu masyve bus activeFilterVal reiksme, mes atrinkim ta reikme
+
+  const filteredPosts = allPosts.filter(({ tags }) =>
+    tags.includes(activeFilterVal),
+  );
+
+  const filteredOrAll = activeFilterVal === 'all' ? allPosts : filteredPosts;
 
   return (
     <Container>
@@ -56,7 +62,7 @@ function PostsPage() {
                 onChange={handleTagFilterChange}
                 type="radio"
                 name="tagFilter"
-                // checked={activeFilterVal}
+                checked={activeFilterVal === tag}
                 id={tag}
                 value={tag}
               />
@@ -66,7 +72,7 @@ function PostsPage() {
         </Flex>
       </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
-      <PostsList posts={allPosts} />
+      <PostsList posts={filteredOrAll} />
     </Container>
   );
 }
