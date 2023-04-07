@@ -10,7 +10,14 @@ function PostsPage() {
   const [allPosts, setAllPosts, error, isLoading] = useGetData(
     'http://localhost:5000/posts',
   );
+  console.log('allPosts ===', allPosts);
 
+  // is all posts gauti visus skirtingus tagus
+  // ['html', 'css'...]
+  const testFilter = ['html', 'css', 'JS'];
+  // sugeneruoti radio button elementus su label is testFilter
+
+  // sukurti state activeFilterVal  = 'all'
   if (error) {
     // console.log('error ===', error);
   }
@@ -31,6 +38,17 @@ function PostsPage() {
         <h1>PostsPage</h1>
         <p>Welcome to PostsPage</p>
       </Wrap>
+      <fieldset>
+        <legend>Filter by</legend>
+        <div>
+          <input type="radio" />
+          <label htmlFor="">CSS</label>
+        </div>
+        <div>
+          <input type="radio" />
+          <label htmlFor="">HTML</label>
+        </div>
+      </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
       <PostsList posts={allPosts} />
     </Container>
