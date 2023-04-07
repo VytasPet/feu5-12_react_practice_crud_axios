@@ -3,6 +3,7 @@ import Container from '../components/ui/Container';
 import Alert from './../components/ui/Alert';
 import Feedback from '../components/ui/Feedback';
 import Grid from '../components/ui/grid/Grid';
+import Spinner from '../components/ui/Spinner';
 
 function HomePage() {
   return (
@@ -16,6 +17,8 @@ function HomePage() {
         Sekme
       </Feedback>
       <h1>HomePage</h1>
+      <Spinner />
+
       <p>Welcome to HomePage</p>
     </Container>
   );

@@ -4,17 +4,20 @@ import PostsList from '../components/postsComponents/PostsList';
 import useGetData from '../hooks/useGetData';
 import Alert from '../components/ui/Alert';
 import styled from 'styled-components';
+import { getAllDiffTags } from '../utils/helpers';
+import { useState } from 'react';
 
 function PostsPage() {
+  const [activeFilterVal, setActiveFilterVal] = useState('all');
   // 2 sukrti state klaidai errorPosts
   const [allPosts, setAllPosts, error, isLoading] = useGetData(
     'http://localhost:5000/posts',
   );
   console.log('allPosts ===', allPosts);
 
-  // is all posts gauti visus skirtingus tagus
-  // ['html', 'css'...]
-  const testFilter = ['html', 'css', 'JS'];
+  let testFilter = ['all', 'html', 'css', 'JS'];
+  testFilter = getAllDiffTags(allPosts);
+  testFilter.unshift('all');
   // sugeneruoti radio button elementus su label is testFilter
 
   // sukurti state activeFilterVal  = 'all'
@@ -24,9 +27,15 @@ function PostsPage() {
 
   const networkError = error.code === 'ERR_NETWORK';
 
-  // 4 sukurti klaidos texto kintamaji errorText
-  // errorText yra lygus tusciai kabutei, bet jei errorPosts yra lygus ERR_NETWORK
-  // tada jis lygus "There was a network error, try agail later"
+  function handleTagFilterChange(e) {
+    console.log('handleTagFilterChange e.target.value ===', e.target.value);
+  }
+
+  // const filteredPosts = allPosts.filter();
+  // atrinkimo salyga?
+  // kai kas su taps su kuo atrinksim elementa?
+  // activeFilterVal => CSS
+  // kai viename is all posts tagu masyve bus activeFilterVal reiksme, mes atrinkim ta reikme
 
   return (
     <Container>
@@ -40,14 +49,21 @@ function PostsPage() {
       </Wrap>
       <fieldset>
         <legend>Filter by</legend>
-        <div>
-          <input type="radio" />
-          <label htmlFor="">CSS</label>
-        </div>
-        <div>
-          <input type="radio" />
-          <label htmlFor="">HTML</label>
-        </div>
+        <Flex>
+          {testFilter.map((tag) => (
+            <div key={tag}>
+              <input
+                onChange={handleTagFilterChange}
+                type="radio"
+                name="tagFilter"
+                // checked={activeFilterVal}
+                id={tag}
+                value={tag}
+              />
+              <label htmlFor={tag}>{tag}</label>
+            </div>
+          ))}
+        </Flex>
       </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
       <PostsList posts={allPosts} />
@@ -58,6 +74,11 @@ function PostsPage() {
 const Wrap = styled.div`
   margin-top: 3rem;
   margin-bottom: 3rem;
+`;
+const Flex = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 `;
 
 export default PostsPage;
