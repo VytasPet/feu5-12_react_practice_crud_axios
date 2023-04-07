@@ -1,4 +1,8 @@
 import './grid.css';
+
+// Grid
+// pakeisti css i styled
+
 // apjuosiantis elementas suteikiantis papildomu stiliaus ar funkciju dalyku
 function Grid(props) {
   const inlineStyleObj = {
@@ -11,4 +15,6 @@ function Grid(props) {
     </div>
   );
 }
+
+// validuoti props
 export default Grid;

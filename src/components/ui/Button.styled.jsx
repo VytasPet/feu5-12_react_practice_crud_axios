@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { PropTypes } from 'prop-types';
 
 const sizes = {
   small: css`
@@ -70,6 +71,12 @@ function Button({ children, size = 'medium', variant = 'primary', ...rest }) {
     </StyledButton>
   );
 }
+
+Button.propTypes = {
+  size: PropTypes.oneOf(['medium', 'small', 'large']),
+  variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
+  children: PropTypes.string,
+};
 
 export const SubmitButton = styled(Button).attrs((props) => ({
   type: 'submit',
