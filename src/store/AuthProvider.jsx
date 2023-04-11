@@ -2,6 +2,7 @@ import { createContext, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const AuthContext = createContext({
+  email: null,
   token: null,
   login(userToken, userEmail) {},
   logout() {},
@@ -14,9 +15,10 @@ const localTokenKey = 'LOCAL_TOKEN';
 function AuthProvider({ children }) {
   // pasiimti is storage jei yra
   const tokenFromStorage = localStorage.getItem(localTokenKey);
+  const emailFromStorage = localStorage.getItem(localEmailKey);
   // console.log('tokenFromStorage ===', tokenFromStorage);
   const [token, setToken] = useState(tokenFromStorage || '');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(emailFromStorage || '');
 
   // const isLoggedIn = token === '' ? false : true;
   // const isLoggedIn = token ? true : false;
@@ -27,6 +29,7 @@ function AuthProvider({ children }) {
     setEmail(userEmail);
     // irasyti i storage
     localStorage.setItem(localTokenKey, userToken);
+    localStorage.setItem(localEmailKey, userEmail);
   }
   function logout() {
     // sukurti funkcija logout
@@ -35,6 +38,7 @@ function AuthProvider({ children }) {
     setEmail('');
     // istrinti is storage
     localStorage.removeItem(localTokenKey);
+    localStorage.removeItem(localEmailKey);
   }
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka

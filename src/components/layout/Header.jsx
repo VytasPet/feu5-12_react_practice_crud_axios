@@ -65,7 +65,7 @@ function Header() {
           {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
           {ctx.isLoggedIn && (
             <Link to={'/'}>
-              {/* email of current user */}
+              user: <span>{ctx.email}</span>
               <Button onClick={ctx.logout}>Loguot</Button>
             </Link>
           )}
