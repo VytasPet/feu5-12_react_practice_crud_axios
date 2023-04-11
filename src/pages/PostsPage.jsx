@@ -6,6 +6,7 @@ import Alert from '../components/ui/Alert';
 import styled from 'styled-components';
 import { getAllDiffTags } from '../utils/helpers';
 import { useState } from 'react';
+import axios from 'axios';
 
 function PostsPage() {
   const [activeFilterVal, setActiveFilterVal] = useState('all');
@@ -44,7 +45,19 @@ function PostsPage() {
   const filteredOrAll = activeFilterVal === 'all' ? allPosts : filteredPosts;
 
   function deletePostHandler(idToDelete) {
-    console.log('deletePostHandler', idToDelete);
+    axios
+      .delete(`http://localhost:5000/posts/${idToDelete}`)
+      .then((delResult) => {
+        console.log('delResult ===', delResult);
+        if (delResult.status === 200) {
+          console.log('istrinta sekmingai');
+          // jei istrinta sekmingai antaujinam state
+          setAllPosts((prevPosts) =>
+            prevPosts.filter(({ id }) => id !== idToDelete),
+          );
+        }
+      })
+      .catch((err) => console.warn(err));
   }
 
   return (
