@@ -6,6 +6,12 @@ import { useFormik } from 'formik';
 import { SubmitButton } from '../ui/Button.styled';
 import { useAuthContext } from '../../store/AuthProvider';
 
+const commentObj = {
+  authorEmail: 'james@bond.com',
+  text: 'this is a test comment',
+  postId: '9021793848917992',
+};
+
 function CommentForm() {
   const { email } = useAuthContext();
   const formik = useFormik({

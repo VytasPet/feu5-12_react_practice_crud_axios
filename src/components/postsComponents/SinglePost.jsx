@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes, { func } from 'prop-types';
+import PropTypes from 'prop-types';
 import Button from '../ui/Button.styled';
 import { Link } from 'react-router-dom';
 

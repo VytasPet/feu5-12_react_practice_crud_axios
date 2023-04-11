@@ -1,14 +1,20 @@
 import React from 'react';
+import CommentForm from '../forms/CommentForm';
+import CommentsList from './CommentsList';
+import useGetData from '../../hooks/useGetData';
 
-function CommentBlock() {
-  // atkelti <h2>Comment form</h2>
+function CommentBlock({ postId }) {
+  const [currentComments, setComments, commentErr, isLoading] = useGetData(
+    'http://localhost:5000/comments/' + postId,
+  );
+  console.log('currentComments ===', currentComments);
   // sukurti state arba pasinaudoti musu custom hook
   // gauti visus komentarus is http://localhost:5000/comments
   // paduoti i Comment list kad jame atvaizduotume sarasa
   return (
     <div>
-      <h2>Comment form</h2>
-      <h2>Comment list</h2>
+      <CommentForm />
+      <CommentsList items={currentComments} />
     </div>
   );
 }
