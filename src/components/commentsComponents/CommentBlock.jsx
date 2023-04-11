@@ -11,6 +11,11 @@ function CommentBlock({ postId }) {
   // sukurti state arba pasinaudoti musu custom hook
   // gauti visus komentarus is http://localhost:5000/comments
   // paduoti i Comment list kad jame atvaizduotume sarasa
+
+  // fn addNewComment()
+  // siusti su axios i back end
+  // setComments() kad atvaizduoti nauja komentara
+
   return (
     <div>
       <CommentForm />

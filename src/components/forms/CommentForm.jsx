@@ -30,6 +30,9 @@ function CommentForm() {
     },
     onSubmit(values) {
       console.log('values ===', values);
+      // sukurti comentaro objekta (commentObj) ir issiusti i back
+      // gauti cia postId
+      // ivygdyti funkcija esancia CommentBlock componente
     },
   });
 
