@@ -8,8 +8,14 @@ const AuthContext = createContext({
   isLoggedIn: false,
 });
 
+const localEmailKey = 'LOCAL_EMAIL';
+const localTokenKey = 'LOCAL_TOKEN';
+
 function AuthProvider({ children }) {
-  const [token, setToken] = useState('');
+  // pasiimti is storage jei yra
+  const tokenFromStorage = localStorage.getItem(localTokenKey);
+  // console.log('tokenFromStorage ===', tokenFromStorage);
+  const [token, setToken] = useState(tokenFromStorage || '');
   const [email, setEmail] = useState('');
 
   // const isLoggedIn = token === '' ? false : true;
@@ -19,12 +25,16 @@ function AuthProvider({ children }) {
   function login(userToken, userEmail) {
     setToken(userToken);
     setEmail(userEmail);
+    // irasyti i storage
+    localStorage.setItem(localTokenKey, userToken);
   }
   function logout() {
     // sukurti funkcija logout
     // nustato token ir email i ''
     setToken('');
     setEmail('');
+    // istrinti is storage
+    localStorage.removeItem(localTokenKey);
   }
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka
