@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { PropTypes } from 'prop-types';
+import { PropTypes, func } from 'prop-types';
 
 const sizes = {
   small: css`
@@ -64,9 +64,15 @@ const StyledButton = styled.button`
   ${(props) => variants[props.variant]};
 `;
 
-function Button({ children, size = 'medium', variant = 'primary', ...rest }) {
+function Button({
+  onClick,
+  children,
+  size = 'medium',
+  variant = 'primary',
+  ...rest
+}) {
   return (
-    <StyledButton size={size} variant={variant} {...rest}>
+    <StyledButton onClick={onClick} size={size} variant={variant} {...rest}>
       {children}
     </StyledButton>
   );
@@ -76,6 +82,7 @@ Button.propTypes = {
   size: PropTypes.oneOf(['medium', 'small', 'large']),
   variant: PropTypes.oneOf(['primary', 'secondary', 'success']),
   children: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 export const SubmitButton = styled(Button).attrs((props) => ({

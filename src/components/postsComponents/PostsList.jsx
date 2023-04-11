@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import SinglePost from './SinglePost';
 import PropTypes from 'prop-types';
-function PostsList({ posts }) {
+function PostsList({ posts, onDeletePost }) {
   return (
     <Container>
       {posts.map((post) => (
-        <SinglePost key={post.id} post={post} />
+        <SinglePost key={post.id} post={post} onDeletePost={onDeletePost} />
       ))}
     </Container>
   );
@@ -14,6 +14,7 @@ function PostsList({ posts }) {
 
 PostsList.propTypes = {
   posts: PropTypes.array,
+  onDeletePost: PropTypes.func,
 };
 
 const Container = styled.div`

@@ -13,7 +13,7 @@ function PostsPage() {
   const [allPosts, setAllPosts, error, isLoading] = useGetData(
     'http://localhost:5000/posts',
   );
-  console.log('allPosts ===', allPosts);
+  // console.log('allPosts ===', allPosts);
 
   let testFilter = ['all', 'html', 'css', 'JS'];
   testFilter = getAllDiffTags(allPosts);
@@ -42,6 +42,10 @@ function PostsPage() {
   );
 
   const filteredOrAll = activeFilterVal === 'all' ? allPosts : filteredPosts;
+
+  function deletePostHandler(idToDelete) {
+    console.log('deletePostHandler', idToDelete);
+  }
 
   return (
     <Container>
@@ -72,7 +76,7 @@ function PostsPage() {
         </Flex>
       </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
-      <PostsList posts={filteredOrAll} />
+      <PostsList posts={filteredOrAll} onDeletePost={deletePostHandler} />
     </Container>
   );
 }
